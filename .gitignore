@@ -167,5 +167,22 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
 # PyPI configuration file
 .pypirc
+# Project Specific
+data/twitter_images/*
+data/twitter_videos/*
+data/twitter_frames/*
+data/twitter_tweets/*
+data/twitter_text_only/*
+data/twitter_with_images/*
+data/tiktok_videos/*
+data/tiktok_frames/*
+!data/*/.gitkeep
+*.db
