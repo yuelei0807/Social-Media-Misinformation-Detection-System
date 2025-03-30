@@ -48,5 +48,3 @@ Social-Media-Misinformation-Detection-System/
 
 ## Installation
 Instructions for setting up the project will be added soon.
-
-

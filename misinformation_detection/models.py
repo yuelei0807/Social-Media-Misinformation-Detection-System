@@ -1,4 +1,13 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text, Boolean
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    DateTime,
+    ForeignKey,
+    Text,
+    Boolean,
+)
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -19,7 +28,7 @@ class Tweet(Base):
     quote_count = Column(Integer, default=0)
     collected_at = Column(DateTime, default=datetime.utcnow)
     has_media = Column(Boolean, default=False)
-    
+
     # Relationships
     media_items = relationship("TwitterMedia", back_populates="tweet")
     analysis_results = relationship("MisinformationAnalysis", back_populates="tweet")
@@ -34,7 +43,7 @@ class TwitterMedia(Base):
     url = Column(String, nullable=False)
     local_path = Column(String, nullable=True)
     processed = Column(Boolean, default=False)
-    
+
     # Relationships
     tweet = relationship("Tweet", back_populates="media_items")
 
@@ -48,10 +57,14 @@ class TikTokVideo(Base):
     description = Column(Text, nullable=True)
     local_path = Column(String, nullable=False)
     collected_at = Column(DateTime, default=datetime.utcnow)
-    collected_by = Column(String, nullable=False)  # Username of team member who collected it
-    
+    collected_by = Column(
+        String, nullable=False
+    )  # Username of team member who collected it
+
     # Relationships
-    analysis_results = relationship("MisinformationAnalysis", back_populates="tiktok_video")
+    analysis_results = relationship(
+        "MisinformationAnalysis", back_populates="tiktok_video"
+    )
 
 
 class MisinformationAnalysis(Base):
@@ -60,13 +73,15 @@ class MisinformationAnalysis(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     tweet_id = Column(String, ForeignKey("tweets.id"), nullable=True)
     tiktok_video_id = Column(String, ForeignKey("tiktok_videos.id"), nullable=True)
-    text_score = Column(Float, nullable=True)  # Higher score = more likely to be misinformation
+    text_score = Column(
+        Float, nullable=True
+    )  # Higher score = more likely to be misinformation
     image_score = Column(Float, nullable=True)
     combined_score = Column(Float, nullable=True)
     is_potential_misinformation = Column(Boolean, default=False)
     analysis_date = Column(DateTime, default=datetime.utcnow)
     explanation = Column(Text, nullable=True)
-    
+
     # Relationships
     tweet = relationship("Tweet", back_populates="analysis_results")
     tiktok_video = relationship("TikTokVideo", back_populates="analysis_results")

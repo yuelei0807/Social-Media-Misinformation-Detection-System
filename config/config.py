@@ -33,6 +33,6 @@ for directory in [
     TWITTER_VIDEOS_DIR,
     TWITTER_FRAMES_DIR,
     TIKTOK_VIDEOS_DIR,
-    TIKTOK_FRAMES_DIR
+    TIKTOK_FRAMES_DIR,
 ]:
     directory.mkdir(parents=True, exist_ok=True)
